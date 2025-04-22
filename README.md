@@ -1,2 +1,2 @@
 # HackerRank
-semana 1 dos exercícios do lab
+exercícios do lab
