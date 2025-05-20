@@ -13,28 +13,35 @@ class Person {
     
         virtual void getdata() = 0;
         virtual void putdata() = 0;
-        virtual int cur_id() = 0;
+        virtual int get_cur_id() = 0;
 };
 
 class Professor : public Person{
     private:
         int publications;
+        static int cur_id;
     public:
+        int get_cur_id() override {
+            cur_id += 1;
+            return  cur_id;
+        }
         void getdata() override {
             cin >> name >> age >> publications;
         }
         void putdata() override {
-            cout << name << " " << age << " " << publications << " " << cur_id() << endl;
-        }
-        int cur_id() override {
-            return 1;
+            cout << name << " " << age << " " << publications << " " << get_cur_id() << endl;
         }
 };
 
 class Student : public Person{
     private:
         int marks[6];
+        static int cur_id;
     public:
+        int get_cur_id() override {
+            cur_id += 1;
+            return  cur_id;
+        }
         void getdata() override {
             cin >> name >> age;
             for(int i = 0; i < 6; i++){
@@ -46,12 +53,11 @@ class Student : public Person{
             for(int i=0; i < 6; i++){
                 sum += marks[i];
             } 
-            cout << name << " " << age << " " << sum << " " << cur_id() << endl;
-        }
-        int cur_id() override {
-            return 2;
+            cout << name << " " << age << " " << sum << " " << get_cur_id() << endl;
         }
 };
+int Student::cur_id = 0;
+int Professor::cur_id = 0;
 int main(){
 
     int n, val;
